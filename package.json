@@ -1,0 +1,21 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/akivonen/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/akivonen/frontend-project-46/actions)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Artjom Kivonen",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^28.2.0"
+  },
+  "dependencies": {
+    "commander": "^12.0.0"
+  }
+}
