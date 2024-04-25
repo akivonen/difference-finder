@@ -2,8 +2,9 @@ install:
 	npm ci
 gendiff:
 	node bin/gendiff.js
-make lint:
+test:
+	npm test
+lint:
 	npx eslint .
 publish: 
 	npm publish --dry-run
-.PHONY: test

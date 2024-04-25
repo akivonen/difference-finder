@@ -1,4 +1,4 @@
 import parse from './parse.js';
-import genDiff from './genDiff.js';
+import compare from './compare.js';
 
-export { parse, genDiff };
+export default (filepath1, filepath2) => compare(parse(filepath1), parse(filepath2));

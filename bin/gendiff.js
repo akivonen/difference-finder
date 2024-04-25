@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { parse, genDiff } from '../src/index.js';
+import genDiff from '../src/index.js';
 
 const program = new Command();
 
@@ -13,9 +13,7 @@ program
   .argument('<filepath1>')
   .argument('<filepath2>')
   .action((filepath1, filepath2) => {
-    const file1 = parse(filepath1);
-    const file2 = parse(filepath2);
-    console.log(genDiff(file1, file2));
+    console.log(genDiff(filepath1, filepath2));
   });
 
 program.parse(process.argv);
