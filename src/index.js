@@ -1,4 +1,4 @@
-import parse from './parse.js';
+import parsers from './parsers.js';
 import compare from './compare.js';
 
-export default (filepath1, filepath2) => compare(parse(filepath1), parse(filepath2));
+export default (filepath1, filepath2) => compare(parsers(filepath1), parsers(filepath2));

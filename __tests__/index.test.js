@@ -13,4 +13,5 @@ beforeAll(() => {
 
 test('plain', () => {
   expect(genDiff('file1.json', 'file2.json')).toEqual(plainActual);
+  expect(genDiff('file1.yml', 'file2.yml')).toEqual(plainActual);
 });
