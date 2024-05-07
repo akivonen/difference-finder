@@ -1,31 +1,27 @@
-import _ from 'lodash';
+import isObjectAndNotNull from './utils.js';
 
-const genDiff = (file1, file2) => {
-  const obj1 = file1;
-  const obj2 = file2;
-  const diff = [];
+const compare = (obj1, obj2) => {
   const obj1keys = Object.keys(obj1);
   const obj2keys = Object.keys(obj2);
   const uniqueKeys = Array.from(new Set([...obj1keys, ...obj2keys]));
-  uniqueKeys.forEach((key) => {
-    if (obj1keys.includes(key) && obj2keys.includes(key)) {
-      if (obj2[key] === obj1[key]) {
-        diff.push([' ', key, obj1[key]]);
-      } else {
-        diff.push(['-', key, obj1[key]], ['+', key, obj2[key]]);
-      }
-    } else if (!obj2keys.includes(key)) {
-      diff.push(['-', key, obj1[key]]);
-    } else {
-      diff.push(['+', key, obj2[key]]);
+  const sortedUniqueKeys = [...uniqueKeys].sort();
+  const data = sortedUniqueKeys.reduce((acc, key) => {
+    const value1 = obj1[key];
+    const value2 = obj2[key];
+    if (isObjectAndNotNull(value1) && isObjectAndNotNull(value2)) {
+      return { ...acc, [key]: { type: 'nested', children: compare(obj1[key], obj2[key]) } };
     }
-  });
-  const sortedDiff = _.sortBy(diff, [1]);
-  const preparedDiff = sortedDiff
-    .map(([sign, key, value]) => `  ${sign} ${key}: ${value}`)
-    .join('\n');
-  const result = ['{', preparedDiff, '}'].join('\n');
-  return result;
+    if (value1 === value2) {
+      return { ...acc, [key]: { type: 'unchanged', value: value1 } };
+    }
+    if (!obj1keys.includes(key)) {
+      return { ...acc, [key]: { type: 'added', value: value2 } };
+    }
+    if (!obj2keys.includes(key)) {
+      return { ...acc, [key]: { type: 'removed', value: value1 } };
+    }
+    return { ...acc, [key]: { type: 'changed', prevValue: value1, currValue: value2 } };
+  }, {});
+  return data;
 };
-
-export default genDiff;
+export default compare;

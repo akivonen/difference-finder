@@ -14,7 +14,7 @@ const parsers = (filename) => {
   const file = readFile(filename);
   const fileExtention = path.extname(filename).slice(1);
   const parsedData = parserMapping[fileExtention](file);
-  console.log(parsedData);
+  // console.log(parsedData);
   return parsedData;
 };
 export default parsers;

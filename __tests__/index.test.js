@@ -4,14 +4,14 @@ import path from 'node:path';
 import genDiff from '../src/index.js';
 
 const getFixturePath = (filename) => path.resolve(process.cwd(), './__tests__', '__fixtures__', filename);
-let plainActual;
+let nestedActual;
 
 beforeAll(() => {
-  const filepath = getFixturePath('plain.txt');
-  plainActual = fs.readFileSync(filepath, 'utf-8');
+  const filepath = getFixturePath('nested.txt');
+  nestedActual = fs.readFileSync(filepath, 'utf-8');
 });
 
-test('plain', () => {
-  expect(genDiff('file1.json', 'file2.json')).toEqual(plainActual);
-  expect(genDiff('file1.yml', 'file2.yml')).toEqual(plainActual);
+test('nested', () => {
+  expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json')))
+    .toEqual(nestedActual);
 });
