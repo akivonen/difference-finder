@@ -20,7 +20,7 @@ const compare = (obj1, obj2) => {
     if (!obj2keys.includes(key)) {
       return { ...acc, [key]: { type: 'removed', value: value1 } };
     }
-    return { ...acc, [key]: { type: 'changed', prevValue: value1, currValue: value2 } };
+    return { ...acc, [key]: { type: 'updated', prevValue: value1, value: value2 } };
   }, {});
   return data;
 };
