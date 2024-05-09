@@ -1,9 +1,9 @@
-import isObjectAndNotNull from '../utils.js';
+import isObject from '../utils.js';
 
 const plain = (comparedData, path = '') => {
   const getPath = (prop) => `${path}${path === '' ? '' : '.'}${prop}`;
   const handleVal = (value) => {
-    if (isObjectAndNotNull(value)) {
+    if (isObject(value)) {
       return '[complex value]';
     }
     if (typeof value === 'string') {

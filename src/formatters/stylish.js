@@ -1,7 +1,7 @@
-import isObjectAndNotNull from '../utils.js';
+import isObject from '../utils.js';
 
 const stylish = (comparedData, depth = 1) => {
-  const handleValue = (value) => (isObjectAndNotNull(value)
+  const handleValue = (value) => (isObject(value)
     ? stylish(value, depth + 1)
     : value);
 

@@ -1,5 +1,5 @@
-const isObjectAndNotNull = (data) => typeof data === 'object'
+const isObject = (data) => typeof data === 'object'
   && !Array.isArray(data)
   && data !== null;
 
-export default isObjectAndNotNull;
+export default isObject;

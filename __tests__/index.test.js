@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import genDiff from '../src/index.js';
 
-const getFixturePath = (filename) => path.resolve(process.cwd(), './__tests__', '__fixtures__', filename);
+const getFixturePath = (filename) => path.resolve(process.cwd(), './__fixtures__', filename);
 let stylishActual;
 let plainActual;
 let jsonActual;

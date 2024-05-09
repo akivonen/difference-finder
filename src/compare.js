@@ -1,4 +1,4 @@
-import isObjectAndNotNull from './utils.js';
+import isObject from './utils.js';
 
 const compare = (obj1, obj2) => {
   const obj1keys = Object.keys(obj1);
@@ -8,7 +8,7 @@ const compare = (obj1, obj2) => {
   const data = sortedUniqueKeys.reduce((acc, key) => {
     const value1 = obj1[key];
     const value2 = obj2[key];
-    if (isObjectAndNotNull(value1) && isObjectAndNotNull(value2)) {
+    if (isObject(value1) && isObject(value2)) {
       return { ...acc, [key]: { type: 'nested', children: compare(obj1[key], obj2[key]) } };
     }
     if (value1 === value2) {
