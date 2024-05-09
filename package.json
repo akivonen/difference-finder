@@ -6,6 +6,10 @@
   "scripts": {
     "test": "npx jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akivonen/frontend-project-46.git"
+  },
   "author": "Artjom Kivonen",
   "license": "ISC",
   "type": "module",

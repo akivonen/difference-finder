@@ -1,7 +1,7 @@
 import { test, expect, beforeAll } from '@jest/globals';
 import fs from 'node:fs';
 import path from 'node:path';
-import genDiff from '../src/index.js';
+import genDiff from '../index.js';
 
 const getFixturePath = (filename) => path.resolve(process.cwd(), './__fixtures__', filename);
 let stylishActual;
