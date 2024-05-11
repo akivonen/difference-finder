@@ -12,6 +12,9 @@
   },
   "author": "Artjom Kivonen",
   "license": "ISC",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "type": "module",
   "devDependencies": {
     "eslint": "^8.2.0",
