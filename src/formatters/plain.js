@@ -1,4 +1,4 @@
-import isObject from '../utils.js';
+import { isObject } from '../utils.js';
 
 const plain = (comparedData, path = '') => {
   const getPath = (prop) => `${path}${path === '' ? '' : '.'}${prop}`;

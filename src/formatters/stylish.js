@@ -1,4 +1,4 @@
-import isObject from '../utils.js';
+import { isObject } from '../utils.js';
 
 const stylish = (comparedData, depth = 1) => {
   const handleValue = (value) => (isObject(value)

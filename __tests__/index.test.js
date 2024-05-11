@@ -1,33 +1,43 @@
-import { test, expect, beforeAll } from '@jest/globals';
-import fs from 'node:fs';
-import path from 'node:path';
+import {
+  test, expect, beforeAll, describe,
+} from '@jest/globals';
 import genDiff from '../index.js';
+import { getFilePath, readFile } from '../src/utils.js';
 
-const getFixturePath = (filename) => path.resolve(process.cwd(), './__fixtures__', filename);
 let stylishActual;
-let plainActual;
-let jsonActual;
 
 beforeAll(() => {
-  const stylish = getFixturePath('stylish.txt');
-  const plain = getFixturePath('plain.txt');
-  const json = getFixturePath('json.txt');
-  stylishActual = fs.readFileSync(stylish, 'utf-8');
-  plainActual = fs.readFileSync(plain, 'utf-8');
-  jsonActual = fs.readFileSync(json, 'utf-8');
+  stylishActual = readFile(getFilePath('stylish.txt'));
 });
 
-test('stylish', () => {
-  expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json')))
+const testCases = [
+  { extension: 'json', format: 'stylish' },
+  { extension: 'json', format: 'plain' },
+  { extension: 'json', format: 'json' },
+  { extension: 'yml', format: 'stylish' },
+  { extension: 'yml', format: 'plain' },
+  { extension: 'yml', format: 'json' },
+];
+
+describe('allFormats', () => {
+  test.each(testCases)('$extension $format', ({ extension, format }) => {
+    const actual = readFile(getFilePath(`${format}.txt`));
+    expect(genDiff(`file1.${extension}`, `file2.${extension}`, format))
+      .toEqual(actual);
+  });
+});
+
+test('default stylish', () => {
+  expect(genDiff('file1.json', 'file2.json'))
     .toEqual(stylishActual);
 });
-
-test('plain', () => {
-  expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain'))
-    .toEqual(plainActual);
+test('incorrect format', () => {
+  expect(() => {
+    genDiff('file1.json', 'file2.json', 'wrongFormat');
+  }).toThrow();
 });
-
-test('json', () => {
-  expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json'))
-    .toEqual(jsonActual);
+test('incorrect args', () => {
+  expect(() => {
+    genDiff('file1', 'file2.json');
+  }).toThrow();
 });

@@ -1,4 +1,4 @@
-import isObject from './utils.js';
+import { isObject } from './utils.js';
 
 const compare = (obj1, obj2) => {
   const obj1keys = Object.keys(obj1);
