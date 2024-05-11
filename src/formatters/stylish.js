@@ -1,18 +1,16 @@
 import { isObject } from '../utils.js';
 
-const stylish = (comparedData, depth = 1) => {
-  const handleValue = (value) => (isObject(value)
-    ? stylish(value, depth + 1)
-    : value);
+const sign = {
+  nested: ' ',
+  unchanged: ' ',
+  updated: '-+',
+  added: '+',
+  removed: '-',
+};
+const spacesCount = 4;
 
-  const sign = {
-    nested: ' ',
-    unchanged: ' ',
-    updated: '-+',
-    added: '+',
-    removed: '-',
-  };
-  const spacesCount = 4;
+const stylish = (comparedData, depth = 1) => {
+  const handleValue = (value) => (isObject(value) ? stylish(value, depth + 1) : value);
   const indent = depth * spacesCount;
   const beforeIndent = (currSign) => `${' '.repeat(indent - 2)}${currSign} `;
   const afterIndent = ' '.repeat(indent - spacesCount);
@@ -31,12 +29,7 @@ const stylish = (comparedData, depth = 1) => {
         return [...acc, `${beforeIndent(sign[type])}${prop}: ${handleValue(value)}`];
     }
   }, []);
-
-  return [
-    '{',
-    ...results,
-    `${afterIndent}}`,
-  ].join('\n');
+  return ['{', ...results, `${afterIndent}}`].join('\n');
 };
 
 export default stylish;

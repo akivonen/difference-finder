@@ -1,16 +1,16 @@
 import { isObject } from '../utils.js';
 
+const handleVal = (value) => {
+  if (isObject(value)) {
+    return '[complex value]';
+  }
+  if (typeof value === 'string') {
+    return `'${value}'`;
+  }
+  return value;
+};
 const plain = (comparedData, path = '') => {
   const getPath = (prop) => `${path}${path === '' ? '' : '.'}${prop}`;
-  const handleVal = (value) => {
-    if (isObject(value)) {
-      return '[complex value]';
-    }
-    if (typeof value === 'string') {
-      return `'${value}'`;
-    }
-    return value;
-  };
   const entries = Object.entries(comparedData);
   const results = entries.reduce((acc, [prop, val]) => {
     const { value, type } = val;
