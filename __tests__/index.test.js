@@ -1,14 +1,6 @@
-import {
-  test, expect, beforeAll, describe,
-} from '@jest/globals';
+import { test, expect, describe } from '@jest/globals';
 import genDiff from '../index.js';
 import { getFilePath, readFile } from '../src/utils.js';
-
-let stylishActual;
-
-beforeAll(() => {
-  stylishActual = readFile(getFilePath('stylish.txt'));
-});
 
 const testCases = [
   { extension: 'json', format: 'stylish' },
@@ -27,17 +19,20 @@ describe('allFormats', () => {
   });
 });
 
-test('default stylish', () => {
-  expect(genDiff('file1.json', 'file2.json'))
-    .toEqual(stylishActual);
-});
-test('incorrect format', () => {
-  expect(() => {
-    genDiff('file1.json', 'file2.json', 'wrongFormat');
-  }).toThrow();
-});
-test('incorrect args', () => {
-  expect(() => {
-    genDiff('file1', 'file2.json');
-  }).toThrow();
+describe('errors', () => {
+  const stylishActual = readFile(getFilePath('stylish.txt'));
+  test('default stylish', () => {
+    expect(genDiff('file1.json', 'file2.json'))
+      .toEqual(stylishActual);
+  });
+  test('incorrect format', () => {
+    expect(() => {
+      genDiff('file1.json', 'file2.json', 'wrongFormat');
+    }).toThrow();
+  });
+  test('incorrect args', () => {
+    expect(() => {
+      genDiff('file1', 'file2.json');
+    }).toThrow();
+  });
 });

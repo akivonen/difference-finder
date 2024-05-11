@@ -1,10 +1,11 @@
+import _ from 'lodash';
 import { isObject } from './utils.js';
 
 const compare = (obj1, obj2) => {
   const obj1keys = Object.keys(obj1);
   const obj2keys = Object.keys(obj2);
   const uniqueKeys = Array.from(new Set([...obj1keys, ...obj2keys]));
-  const sortedUniqueKeys = [...uniqueKeys].sort();
+  const sortedUniqueKeys = _.sortBy(uniqueKeys);
   const data = sortedUniqueKeys.reduce((acc, key) => {
     const value1 = obj1[key];
     const value2 = obj2[key];
