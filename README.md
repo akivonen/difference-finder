@@ -3,35 +3,39 @@
 [![Actions Status](https://github.com/akivonen/frontend-project-46/actions/workflows/tests.yml/badge.svg)](https://github.com/akivonen/frontend-project-46/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5074c110b97976b17441/maintainability)](https://codeclimate.com/github/akivonen/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5074c110b97976b17441/test_coverage)](https://codeclimate.com/github/akivonen/frontend-project-46/test_coverage)
-<h2 id="description">Description</h2>
-<p>Difference Finder is a program that determines the difference between two data structures. This is a common task for which there are numerous online services, for example, <a href="http://www.jsondiff.com/" target="_blank">http://www.jsondiff.com/</a>. This mechanism is used when outputting tests or tracking changes in configuration files.</p>
-<p>Utility Features:</p>
-<ul>
-<li>Support for different input formats: YAML, JSON</li>
-<li>Output in plain text, stylish, and JSON format</li>
-</ul>
-<p>Usage example:</p>
-<pre class="hljs"><code class="bash"><span style="color: #999988;font-style: italic"># plain format</span>
-gendiff <span style="color: #000080">--format</span> plain path/to/file.yml another/path/file.json
+### Description
+Difference Finder is a program that determines the difference between two data structures. This is a common task for which there are numerous online services, for example, http://www.jsondiff.com/. This mechanism is used when outputting tests or tracking changes in configuration files. In this project I faced the adoption of complex architectural solutions, automated testing, continuous integration, functional programming, and working with tree-like data structures and recursive algorithms.  
+### Data Structures and Algorithms
+Choosing the proper data structures is one of the keys to a successful architecture and clean code. The convenience of analysis and processing as well as the number and complexity of conditional statements depend on this.
+The main question in the project is how to describe the internal representation of the differences between files as simply as possible. And although there are many different ways to do this, only some of them lead to simple code.
+### Libraries and frameworks
+- commander.js
+- Jest
+### Utility Features:
+- Support for different input formats: YAML, JSON
+- Output in plain text, stylish, and JSON format
+```
+# plain format
+gendiff --format plain path/to/file.yml another/path/file.json
 
-Property <span style="color: #d14">'common.follow'</span> was added with value: <span style="color: #0086B3">false
-</span>Property <span style="color: #d14">'group1.baz'</span> was updated. From <span style="color: #d14">'bas'</span> to <span style="color: #d14">'bars'</span>
-Property <span style="color: #d14">'group2'</span> was removed
+Property 'common.follow' was added with value: false
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group2' was removed
 
-<span style="color: #999988;font-style: italic"># stylish format</span>
+# stylish format
 gendiff filepath1.json filepath2.json
 
-<span style="color: #000000;font-weight: bold">{</span>
-  + follow: <span style="color: #0086B3">false
-    </span>setting1: Value 1
+{
+  + follow: false
+    setting1: Value 1
   - setting2: 200
-  - setting3: <span style="color: #0086B3">true</span>
-  + setting3: <span style="color: #000000;font-weight: bold">{</span>
+  - setting3: true
+  + setting3: {
         key: value
-    <span style="color: #000000;font-weight: bold">}</span>
+    }
   + setting4: blah blah
-  + setting5: <span style="color: #000000;font-weight: bold">{</span>
+  + setting5: {
         key5: value5
-    <span style="color: #000000;font-weight: bold">}</span>
-<span style="color: #000000;font-weight: bold">}</span>
-</code></pre>
+    }
+}
+```
